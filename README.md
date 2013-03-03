@@ -1,6 +1,32 @@
 PHPUnit Framework ExtensionTestCase
 ===================================
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    backupGlobals="false"
+    verbose="true"
+    syntaxCheck="true"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true">
+
+  <testsuites>
+
+      <!-- test with extension -->
+      <testsuite name="FileUtilTest" extension="fileutil">
+        <!-- TODO -->
+      </testsuite>
+
+      <testsuite name="ArrayTest">
+        <directory>tests</directory>
+      </testsuite>
+  </testsuites>
+</phpunit>
+```
+
 
 ```php
 require "src/PHPUnit/Framework/ExtensionTestCase.php";

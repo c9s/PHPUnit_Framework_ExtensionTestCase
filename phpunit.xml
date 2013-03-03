@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
+    bootstrap="tests/bootstrap.php"
     backupGlobals="false"
     verbose="true"
     syntaxCheck="true"
@@ -7,9 +8,10 @@
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true">
-  <testsuites>
-    <testsuite name="Test">
-      <directory suffix="Test.php">tests</directory>
-    </testsuite>
-  </testsuites>
+
+  <extensionTestsuites>
+      <testsuite name="APCExtensionTest" extension="apc">
+
+      </testsuite>
+  </extensionTestsuites>
 </phpunit>
