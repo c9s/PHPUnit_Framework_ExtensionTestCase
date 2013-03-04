@@ -11,7 +11,7 @@
     <active>yes</active>
   </lead>
   <date>2013-03-04</date>
-  <time>01:12:58</time>
+  <time>12:04:18</time>
   <version>
     <release>1.0.0</release>
     <api>1.0.0</api>
@@ -36,6 +36,11 @@
       <pearinstaller>
         <min>1.4</min>
       </pearinstaller>
+      <package>
+        <name>PHPUnit</name>
+        <channel>pear.phpunit.de</channel>
+        <min>3.7</min>
+      </package>
     </required>
   </dependencies>
   <phprelease>

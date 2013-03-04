@@ -4,12 +4,26 @@ PHPUnit Framework ExtensionTestCase
 By using this extension testcase and a phpunit-exttest runner, you 
 can easily integrate phpunit tests with your extension.
 
-The phpunit-exttest runner takes the parameters from `run-tests.sh`
+
+
+Installation
+------------
+
+    $ git clone https://github.com/c9s/PHPUnit_Framework_ExtensionTestCase.git
+    $ cd PHPUnit_Framework_ExtensionTestCase
+    $ pear channel-discover pear.corneltek.com
+    $ pear install -f -a package.xml
+
+Usage
+------
+
+
+The phpunit-exttest runner which runs phpunit with the extension .so file that you've 
+compiled in the `modules` directory
 
 ```sh
 $ phpunit-exttest
 ```
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
