@@ -10,11 +10,11 @@
     <email>cornelius.howl@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2013-03-04</date>
-  <time>12:04:18</time>
+  <date>2013-03-15</date>
+  <time>21:06:43</time>
   <version>
-    <release>1.0.0</release>
-    <api>1.0.0</api>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -25,7 +25,7 @@
   <contents>
     <dir name="/">
       <file name="src/PHPUnit/Framework/ExtensionTestCase.php" role="php" md5sum="a54112f71d2fded3ce8860c39c690d18"/>
-      <file name="bin/phpunit-exttest" role="script" md5sum="038ae447a6422207962fce9602d476ed"/>
+      <file name="bin/phpunit-exttest" role="script" md5sum="ba3d5f024af1f6b6d97936fdee7d5455"/>
     </dir>
   </contents>
   <dependencies>
