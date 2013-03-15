@@ -19,10 +19,10 @@ Usage
 
 
 The phpunit-exttest runner which runs phpunit with the extension .so file that you've 
-compiled in the `modules` directory
+compiled in the `modules` directory, e.g.,
 
 ```sh
-$ phpunit-exttest
+$ phpunit-exttest tests/APCExtensionTest.php
 ```
 
 ```xml
