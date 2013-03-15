@@ -25,7 +25,7 @@ $workdir = getcwd();
 $php = findbin('php');
 $phpunit = findbin('phpunit');
 $extensionName = '';
-$testDir = 'tests';
+$script = array_shift( $argv );
 
 $phpoptions = array(
     "output_handler"          => "",
@@ -82,9 +82,8 @@ foreach( $testsuites as $testsuite ) {
         $args[] = "extension=$extensionName.so";
 
         $args[] = $phpunit;
-        $args[] = $testDir;
 
-        $cmd = $php . ' ' . join(' ', $args);
+        $cmd = $php . ' ' . join(' ', $args) . ' ' . join(' ', $argv);
         echo $cmd , "\n";
         passthru($cmd);
     }
