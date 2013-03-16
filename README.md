@@ -1,42 +1,18 @@
 PHPUnit Framework ExtensionTestCase
 ===================================
 
-By using this extension testcase and a phpunit-exttest runner, you 
-can easily integrate phpunit tests with your extension.
-
-
-
 Installation
 ------------
 
-    $ git clone https://github.com/c9s/PHPUnit_Framework_ExtensionTestCase.git
-    $ cd PHPUnit_Framework_ExtensionTestCase
-    $ pear channel-discover pear.corneltek.com
-    $ pear install -f -a package.xml
+```sh
+$ pear channel-discover pear.corneltek.com
+$ pear install corneltek/PHPUnit_Framework_ExtensionTestCase
+```
 
 Usage
 ------
 
-
-The phpunit-exttest runner which runs phpunit with the extension .so file that you've 
-compiled in the `modules` directory, e.g.,
-
-```sh
-$ extunit php_script.php
-$ extunit --gdb php_script.php
-$ extunit --phpunit --gdb tests/APCExtensionTest.php
-```
-
-Create the extunit config file for extension:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<extunit>
-    <extension>apc</extension>
-</extunit>
-```
-
-And the sample extension testcase class:
+The Sample ExtensionTestcase class:
 
 ```php
 
