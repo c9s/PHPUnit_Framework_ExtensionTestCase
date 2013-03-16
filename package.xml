@@ -11,7 +11,7 @@
     <active>yes</active>
   </lead>
   <date>2013-03-16</date>
-  <time>17:20:18</time>
+  <time>17:21:19</time>
   <version>
     <release>1.1.0</release>
     <api>1.1.0</api>
@@ -24,7 +24,7 @@
   <notes>-</notes>
   <contents>
     <dir name="/">
-      <file name="src/EXTUnit/TestRunner.php" role="php" md5sum="93cfe6732486c07aff32bef3beeb5f4e"/>
+      <file name="src/EXTUnit/TestRunner.php" role="php" md5sum="12eeade9ad6cf3ab0d1bcb9123bbcfa6"/>
       <file name="src/EXTUnit.php" role="php" md5sum="7d485001d05bd4b5a3f34d42253821e2"/>
       <file name="src/PHPUnit/Framework/ExtensionTestCase.php" role="php" md5sum="a54112f71d2fded3ce8860c39c690d18"/>
       <file name="bin/extunit" role="script" md5sum="0cddc2332db3530454b65ba9992c7a89"/>
