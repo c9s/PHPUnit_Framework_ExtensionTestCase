@@ -116,14 +116,16 @@ class EXTUnit_TestRunner
     public function run()
     {
         if ( $this->enableGdb ) {
-            $inits = $this->getGdbInitLines();
-            $init = join("\n",$inits);
-            echo "====> .gdbinit\n";
-            echo $init, "\n";
-            if ( false === file_put_contents(".gdbinit", $init) ) {
-                die("Can not write .gdbinit");
+            if ( ! file_exists('.gdbinit') ) {
+                $inits = $this->getGdbInitLines();
+                $init = join("\n",$inits);
+                echo "====> .gdbinit\n";
+                echo $init, "\n";
+                if ( false === file_put_contents(".gdbinit", $init) ) {
+                    die("Can not write .gdbinit");
+                }
             }
-            system("gdb");
+            passthru("gdb");
         } else {
             $command = $this->program 
                     . ' ' . join(' ',$this->getPHPOptionArguments())
@@ -142,7 +144,6 @@ class EXTUnit_TestRunner
                 . " " . join(' ', $this->getPHPOptionArguments() )
                 . " " . join(' ', $this->getArguments())
                 ;
-        $init[] = "run";
         return $init;
     }
 }
