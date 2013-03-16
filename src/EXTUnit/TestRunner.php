@@ -132,7 +132,7 @@ class EXTUnit_TestRunner
                     . ' ' . join(' ',$this->getArguments())
                     ;
             echo $command , "\n";
-            system($command);
+            passthru($command);
         }
     }
 
