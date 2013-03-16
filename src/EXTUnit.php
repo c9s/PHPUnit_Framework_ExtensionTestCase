@@ -4,14 +4,18 @@ class EXTUnit
 {
     public $dom;
 
+    public $options = array();
+
+    public $enableGdb = false;
+
+    public $enablePHPUnit = false;
+
     public function __construct($file) {
         $this->dom = new DOMDocument;
         $this->dom->load($file);
-    }
 
-    public function getDefaultOptions()
-    {
-        $phpoptions = array(
+        $workdir = getcwd();
+        $this->options = array(
             "output_handler"          => "",
             "open_basedir"            => "",
             "safe_mode"               => "0" ,
@@ -40,36 +44,56 @@ class EXTUnit
             "zlib.output_compression" => "Off" ,
             "mbstring.func_overload"  => "0" ,
         );
-        return $phpoptions;
     }
 
-
-    public function getExtensions()
+    public function setOption($name,$value) 
     {
-        $exts = array();
-        $xextensions = $xpath->query('extensions/extension');
-        foreach($xextensions as $xext ) {
-            $exts[] = $xext->textContent;
-        }
-        return $exts;
+        $this->options[ $name ] = $value;
     }
 
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function getExtensionName()
+    {
+        $xpath = new DOMXPath($this->dom);
+        $exts = array();
+        $xext = $xpath->query('extension');
+        return $xext->item(0)->textContent;
+    }
+
+    public function run($argv)
+    {
+        $runner = new EXTUnit_TestRunner;
+        $runner->setExtension($this->getExtensionName());
+
+        if ( $this->enableGdb ) {
+            $runner->enableGdb(true);
+        }
+        if ( $this->enablePHPUnit ) {
+            $runner->enablePHPUnit(true);
+        }
+        $runner->setProgram( findbin('php') );
+        $runner->setPHPOptions($this->options);
+        $runner->setArguments($argv);
+        $runner->run();
+    }
 
     public function getTestSuites()
     {
         $xpath    = new DOMXPath($this->dom);
-
-
         $xtestsuites = $xpath->query('testsuites/testsuite');
         $suites = array();
         foreach( $xtestsuites as $xs ) {
             $testFile      = $xs->getAttribute('file');
             $extensionName = $xs->getAttribute('extension');
-            $enableGdb           = $xs->getAttribute('gdb');
-            $enablePHPUnit           = $xs->getAttribute('phpunit');
+            $enableGdb     = $xs->getAttribute('gdb');
+            $enablePHPUnit = $xs->getAttribute('phpunit');
 
             $suite = new EXTUnit_TestSuite;
-            $suite->setExtension($extensionName);
+            $suite->addExtension($extensionName);
             $suite->setScript($testFile);
             if ( $enableGdb ) {
                 $suite->enableGdb(true);
@@ -78,11 +102,6 @@ class EXTUnit
                 $suite->enablePHPUnit(true);
             }
 
-            $options = $this->getDefaultOptions();
-            // set option to load the extension from local directory
-            $options["extension"] = $extensionName . '.so';
-            $suite->setOptions($options);
-            $suite->addArgument("-n"); // do not read php.ini config
             foreach( $argv as $a ) {
                 $suite->addArgument($a);
             }
