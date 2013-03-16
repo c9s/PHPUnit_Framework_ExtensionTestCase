@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extunit>
+    <!-- local extensions for php to load -->
+    <extensions>
+        <extension>apc</extension>
+    </extensions>
+
+    <testsuites>
+
+    </testsuites>
+</extunit>

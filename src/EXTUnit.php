@@ -43,35 +43,49 @@ class EXTUnit
         return $phpoptions;
     }
 
-    public function convertOptionsToArguments($options)
+
+    public function getExtensions()
     {
-        $args = array();
-        foreach($options as $key => $value) {
-            $args[] = "-d";
-            $args[] = escapeshellarg("$key=$value");
+        $exts = array();
+        $xextensions = $xpath->query('extensions/extension');
+        foreach($xextensions as $xext ) {
+            $exts[] = $xext->textContent;
         }
-        return $args;
+        return $exts;
     }
+
 
     public function getTestSuites()
     {
         $xpath    = new DOMXPath($this->dom);
+
+
         $xtestsuites = $xpath->query('testsuites/testsuite');
         $suites = array();
         foreach( $xtestsuites as $xs ) {
             $testFile      = $xs->getAttribute('file');
             $extensionName = $xs->getAttribute('extension');
-
-            $args = $this->convertOptionsToArguments($this->getDefaultOptions());
-            $args[] = "-n"; // do not load php.ini
-            $args[] = "-d"; // set option to load the extension from local directory
-            $args[] = "extension=$extensionName.so";
-
-            foreach( $argv as $a ) {
-                $args[] = $a;
-            }
+            $enableGdb           = $xs->getAttribute('gdb');
+            $enablePHPUnit           = $xs->getAttribute('phpunit');
 
             $suite = new EXTUnit_TestSuite;
+            $suite->setExtension($extensionName);
+            $suite->setScript($testFile);
+            if ( $enableGdb ) {
+                $suite->enableGdb(true);
+            }
+            if ( $enablePHPUnit ) {
+                $suite->enablePHPUnit(true);
+            }
+
+            $options = $this->getDefaultOptions();
+            // set option to load the extension from local directory
+            $options["extension"] = $extensionName . '.so';
+            $suite->setOptions($options);
+            $suite->addArgument("-n"); // do not read php.ini config
+            foreach( $argv as $a ) {
+                $suite->addArgument($a);
+            }
             $suite->setArguments($args); 
             $suites[] = $suite;
         }

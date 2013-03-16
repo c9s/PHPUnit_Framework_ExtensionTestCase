@@ -22,34 +22,16 @@ The phpunit-exttest runner which runs phpunit with the extension .so file that y
 compiled in the `modules` directory, e.g.,
 
 ```sh
-$ phpunit-exttest tests/APCExtensionTest.php
+$ extunit php_script.php
+$ extunit --gdb php_script.php
+$ extunit --phpunit --gdb tests/APCExtensionTest.php
 ```
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-    bootstrap="tests/bootstrap.php"
-    backupGlobals="false"
-    verbose="true"
-    syntaxCheck="true"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true">
-
-  <testsuites>
-
-      <!-- test with extension, this launches a new php process with
-           modules/fileutil.so extension -->
-      <testsuite name="FileUtilTest" extension="fileutil">
-        <!-- TODO -->
-      </testsuite>
-
-      <testsuite name="ArrayTest">
-        <directory>tests</directory>
-      </testsuite>
-  </testsuites>
-</phpunit>
+<extunit>
+    <extension>apc</extension>
+</extunit>
 ```
 
 And the sample extension testcase class:
