@@ -11,10 +11,10 @@
     <active>yes</active>
   </lead>
   <date>2013-03-17</date>
-  <time>01:19:04</time>
+  <time>01:34:33</time>
   <version>
-    <release>1.2.0</release>
-    <api>1.2.0</api>
+    <release>1.3.0</release>
+    <api>1.3.0</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -24,10 +24,7 @@
   <notes>-</notes>
   <contents>
     <dir name="/">
-      <file name="src/EXTUnit/TestRunner.php" role="php" md5sum="12eeade9ad6cf3ab0d1bcb9123bbcfa6"/>
-      <file name="src/EXTUnit.php" role="php" md5sum="7d485001d05bd4b5a3f34d42253821e2"/>
       <file name="src/PHPUnit/Framework/ExtensionTestCase.php" role="php" md5sum="ef7ad217207338dbb60186ea60776709"/>
-      <file name="bin/extunit" role="script" md5sum="7ff7427ca91e4e92fb6a33d6b4eb1bfd"/>
     </dir>
   </contents>
   <dependencies>
@@ -47,10 +44,7 @@
   </dependencies>
   <phprelease>
     <filelist>
-      <install name="src/EXTUnit/TestRunner.php" as="EXTUnit/TestRunner.php"/>
-      <install name="src/EXTUnit.php" as="EXTUnit.php"/>
       <install name="src/PHPUnit/Framework/ExtensionTestCase.php" as="PHPUnit/Framework/ExtensionTestCase.php"/>
-      <install name="bin/extunit" as="extunit"/>
     </filelist>
   </phprelease>
 </package>
