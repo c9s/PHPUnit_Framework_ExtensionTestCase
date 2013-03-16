@@ -35,7 +35,7 @@ $script = array_shift( $argv );
 
 if ( file_exists('Makefile') ) {
     system('make > /dev/null', $retval);
-    if ( $retval === false) {
+    if ( $retval === false || $ret !== 0 ) {
         exit();
     }
 }
