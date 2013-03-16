@@ -27,6 +27,8 @@ $ extunit --gdb php_script.php
 $ extunit --phpunit --gdb tests/APCExtensionTest.php
 ```
 
+Create the extunit config file for extension:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <extunit>
