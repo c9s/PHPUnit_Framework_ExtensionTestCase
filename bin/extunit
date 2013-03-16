@@ -1,0 +1,51 @@
+#!/usr/bin/env php 
+<?php
+
+function findbin($bin)
+{
+    $paths = explode(":",getenv('PATH'));
+    foreach( $paths as $path ) {
+        if( file_exists( $path . DIRECTORY_SEPARATOR . $bin ) ) {
+            return $path . DIRECTORY_SEPARATOR . $bin;
+        }
+    }
+}
+
+require "EXTUnit/TestRunner.php";
+require "EXTUnit.php";
+
+$longopts  = array(
+    "gdb", // for gdb
+    "phpunit",
+);
+$options = getopt("", $longopts);
+
+// remove --gdb options from argv
+if ( isset($options['gdb']) ) {
+    $pos = array_search('--gdb',$argv);
+    array_splice($argv,$pos,1);
+}
+// remove --phpunit options from argv
+if ( isset($options['phpunit']) ) {
+    $pos = array_search('--phpunit',$argv);
+    array_splice($argv,$pos,1);
+}
+
+$script = array_shift( $argv );
+
+if ( file_exists('Makefile') ) {
+    system('make > /dev/null', $retval);
+    if ( $retval === false) {
+        exit();
+    }
+}
+
+$extunit = new EXTUnit("extunit.xml");
+
+if ( isset($options['gdb']) ) {
+    $extunit->enableGdb = true;
+}
+if ( isset($options['phpunit']) ) {
+    $extunit->enablePHPUnit = true;
+}
+$extunit->run($argv);
