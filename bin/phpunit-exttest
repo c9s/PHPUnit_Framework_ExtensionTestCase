@@ -20,6 +20,20 @@ function php_option_to_args($options) {
     return $args;
 }
 
+require "EXTUnit/TestSuite.php";
+require "EXTUnit.php";
+
+$longopts  = array(
+    "gdb", // for gdb
+);
+$options = getopt(array(), $longopts);
+
+// remove --gdb options from argv
+if ( isset($options['gdb']) ) {
+    $pos = array_search('--gdb',$argv);
+    array_splice($argv,$pos,1);
+}
+
 
 $workdir = getcwd();
 $php = findbin('php');
@@ -27,66 +41,26 @@ $phpunit = findbin('phpunit');
 $extensionName = '';
 $script = array_shift( $argv );
 
-$phpoptions = array(
-    "output_handler"          => "",
-    "open_basedir"            => "",
-    "safe_mode"               => "0" ,
-    "disable_functions"       => "" ,
-    "output_buffering"        => "Off" ,
-    "error_reporting"         => "32767" ,
-    "display_errors"          => "1"  ,
-    "display_startup_errors"  => "1" ,
-    "log_errors"              => "0"  ,
-    "html_errors"             => "0"  ,
-    "track_errors"            => "1" ,
-    "report_memleaks"         => "1" ,
-    "report_zend_debug"       => "0" ,
-    "docref_root"             => ""  ,
-    "docref_ext"              => ".html" ,
-    "error_prepend_string"    => ""  ,
-    "error_append_string"     => "" ,
-    "auto_prepend_file"       => ""  ,
-    "auto_append_file"        => ""  ,
-    "magic_quotes_runtime"    => "0" ,
-    "ignore_repeated_errors"  => "0"  ,
-    "precision"               => "14"  ,
-    "memory_limit"            => "128M" ,
-    "extension_dir"           => "$workdir/modules/" ,
-    "session.auto_start"      => "0" ,
-    "zlib.output_compression" => "Off" ,
-    "mbstring.func_overload"  => "0" ,
-);
-
-if( ! file_exists('phpunit.xml') ) {
-    die('Missing phpunit.xml');
-}
-
-
-$document = new DOMDocument;
-$document->load('phpunit.xml');
-$xpath    = new DOMXPath($document);
-$testsuites = $xpath->query('testsuites/testsuite');
-
-
+// write gdbinit
 $success = system('make > /dev/null') !== false;
-if(!$success)
+if (!$success) {
     exit();
-
-// XXX: use PHPUnit built-in suite parser
-foreach( $testsuites as $testsuite ) {
-    $testName = $testsuite->getAttribute('name');
-    if( $extensionName = $testsuite->getAttribute('extension') ) {
-        $args = php_option_to_args($phpoptions);
-        $args[] = "-n";
-        $args[] = "-d";
-        $args[] = "extension=$extensionName.so";
-
-        $args[] = $phpunit;
-
-        $cmd = $php . ' ' . join(' ', $args) . ' ' . join(' ', $argv);
-        echo $cmd , "\n";
-        passthru($cmd);
-    }
-    // pcntl_exec($php,$args, $_ENV);
 }
+
+$extunit = new EXTUnit("extension.xml");
+
+if ( isset($options['gdb']) ) {
+
+
+} else {
+
+}
+
+
+
+
+
+
+
+
 
