@@ -1,0 +1,5 @@
+{
+    "name": "corneltek/phpunit-framework-extensiontestcase",
+    "require": { "php": ">=5.3.0" },
+    "autoload": { "files": [ "src/PHPUnit/Framework/ExtensionTestCase.php" ] }
+}
