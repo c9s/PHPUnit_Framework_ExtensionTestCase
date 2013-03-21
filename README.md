@@ -4,6 +4,16 @@ PHPUnit Framework ExtensionTestCase
 Installation
 ------------
 
+composer:
+
+```json
+{
+    require: {
+        "corneltek/phpunit-framework-extensiontestcase": "dev-master"
+    }
+}
+```
+
 ```sh
 $ pear channel-discover pear.corneltek.com
 $ pear install corneltek/PHPUnit_Framework_ExtensionTestCase
